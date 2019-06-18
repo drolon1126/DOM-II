@@ -1,14 +1,13 @@
 // Your code goes here
 let introHeader = document.querySelector('.intro h2');
-console.log(introHeader);
 introHeader.addEventListener('mouseenter', smokeOut, {once : true});
 
+let introImage = document.querySelector('.intro img');
+introImage.addEventListener('dblclick', runAway)
+
+
 function smokeOut(){
-  // index++, deg = index * (45/120), pos = index * (-200/120), blur= index*(20/120)
-  //this.style.transform = `rotate(${deg}deg) translateY(${pos}px)`  
-  //this.style.opacity = `${}`;
-  //this.style.filter= `blur(${blur}px)`;
-  // every 17 frames 120 times
+ 
   let count = 0;
   let ani = setInterval(()=>{animate(this)},33);
 
@@ -24,6 +23,22 @@ function smokeOut(){
       e.style.transform = `rotate(${deg}deg) translateY(${pos}px)`  
       e.style.opacity = `${opa}`;
       e.style.filter= `blur(${blur}px)`;
+    }
+
+  }
+}
+
+function runAway(){
+  let count = 0;
+  let ani = setInterval(()=>{animate(this)},16);
+
+  function animate(e){
+    let pos = count * (1200/60);
+    if(count === 120){
+      clearInterval(ani);
+    } else{
+      count++;
+      e.style.transform = `translateX(${pos}px)`  
     }
 
   }
