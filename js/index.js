@@ -3,7 +3,10 @@ let introHeader = document.querySelector('.intro h2');
 introHeader.addEventListener('mouseenter', smokeOut, {once : true});
 
 let introImage = document.querySelector('.intro img');
-introImage.addEventListener('dblclick', runAway)
+introImage.addEventListener('dblclick', runAway);
+
+let introP = document.querySelector('.intro p');
+window.addEventListener('scroll', changeColor);
 
 
 function smokeOut(){
@@ -42,4 +45,8 @@ function runAway(){
     }
 
   }
+}
+
+function changeColor(){
+  introP.style.color= `hsl(${window.scrollY},100%, 50%)`;
 }
