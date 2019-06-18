@@ -1,7 +1,7 @@
 // Your code goes here
 let introHeader = document.querySelector('.intro h2');
 console.log(introHeader);
-introHeader.addEventListener('mouseover', smokeOut);
+introHeader.addEventListener('mouseenter', smokeOut, {once : true});
 
 function smokeOut(){
   // index++, deg = index * (45/120), pos = index * (-200/120), blur= index*(20/120)
