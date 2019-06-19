@@ -2,11 +2,40 @@
 let introHeader = document.querySelector('.intro h2');
 introHeader.addEventListener('mouseenter', smokeOut, {once : true});
 
-let introImage = document.querySelector('.intro img');
-introImage.addEventListener('dblclick', runAway);
+let body = document.querySelector('body')
+
+let image = document.querySelectorAll('img');
+image[0].addEventListener('dblclick', runAway);
 
 let introP = document.querySelector('.intro p');
 window.addEventListener('scroll', changeColor);
+
+let home = document.querySelector('.home');
+
+home.addEventListener('click',e=>{home.style.color="purple"});
+
+for(let i=1;i<4;i++){
+  image[i].addEventListener('click',e=>{e.stopPropagation(); explode(e.target)}, {once : true});
+}
+
+let navLinks = document.querySelectorAll('nav a');
+navLinks.forEach(link=>{
+  link.addEventListener('click', e=>{
+    e.preventDefault();
+  })
+})
+
+let buttons = document.querySelectorAll('.btn');
+buttons.forEach(link=>{
+  link.addEventListener('click', e=>{
+    e.stopPropagation();
+    if(home.style.fontStyle!=='italic'){
+      home.style.fontStyle = 'italic';
+    } else{
+      home.style.fontStyle = 'normal';
+    }
+  })
+})
 
 
 function smokeOut(){
@@ -48,5 +77,23 @@ function runAway(){
 }
 
 function changeColor(){
-  introP.style.color= `hsl(${window.scrollY},100%, 50%)`;
+  body.style.backgroundColor= `hsl(${window.scrollY},100%, 50%)`;
+}
+
+function explode(e){
+  
+  let count = 0;
+  let ani = setInterval(()=>{animate(e)},16);
+
+  function animate(e){
+    let opa = 1 - (count * (1/60));
+    if(count === 60){
+      e.style.display = 'none';
+      clearInterval(ani);
+    } else{
+      count++;
+      e.style.opacity = `${opa}`;
+      e.style.transform = `scale(${count * 5})`;
+    }
+  }
 }
